@@ -4,6 +4,7 @@ import {
   handleLogout,
   handleRegister,
 } from '../controllers/auth.js';
+import { isLoggedIn } from '../middleware/auth.js';
 import {
   loginValidator,
   registartionValidator,
@@ -15,8 +16,7 @@ const authRoute = Router();
 // /api/register
 authRoute.post('/register', registartionValidator, handleRegister);
 authRoute.post('/login', loginValidator, handleLogin);
-// authRoute.post('/profile', isLogin, loadProfile);
 
-authRoute.get('/logout', handleLogout);
+authRoute.get('/logout', isLoggedIn, handleLogout);
 
 export default authRoute;

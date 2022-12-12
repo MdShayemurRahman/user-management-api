@@ -36,12 +36,39 @@
 - how to create model
 - store user
 - login user
-  - get email, password from request body
+  - get email, password from request
   - check user exist or not with email
   - match password using bcrypt
 
 ## Day-4
 
+- front end
+- create pages
+- react router setup
+- create nav menu
+- register + login form
+- get register + login form data
+- make request to api with the data using axios
+
+## Day-5
+
+- service create
+- front end environment variable setup
+- profile route
+- req.body, req.params -> http://localhost:3001/api/user/:id
+- CRUD operations
+
+## Day-6
+
+- jwt authentication - token generate, token verify
+- isLoggedIn middleware, route protecting in backend
+- fornt end route call with authorization token
+
+## Day-7
+
+
+- protected route- activate user
+- protected route
 - activate user
 - logout user
 - forget password

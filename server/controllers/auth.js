@@ -1,9 +1,20 @@
 import { comparePassword, hashPassword } from '../helper/index.js';
 import { User } from '../model/user.js';
+import jwt from 'jsonwebtoken';
+import { dev } from '../config/index.js';
 
 export const handleRegister = async (req, res) => {
   try {
     const { name, email, password, about } = req.body;
+
+    const existingUser = await User.findOne({ email: email });
+
+    if (existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User was already registered',
+      });
+    }
 
     const hashPass = await hashPassword(password);
 
@@ -61,8 +72,13 @@ export const handleLogin = async (req, res) => {
       });
     }
 
+    const token = jwt.sign({ _id: existingUser._id }, dev.app.jwtSecretKey, {
+      expiresIn: '5m',
+    });
+
     return res.status(200).json({
       message: 'user was logged in',
+      token,
     });
   } catch (error) {
     console.log(error);

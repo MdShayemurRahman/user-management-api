@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+nav {
+  background-color: #2c2c2c;
+  height: 10vh;
+}
+a {
+  color: white;
+  transition: all 0.3s;
+}
+.lists {
+  height: 100%;
+}
+a:hover {
+  color: orange;
+  text-decoration: overline;
+}
+.vertical {
+  flex-direction: column;
+}

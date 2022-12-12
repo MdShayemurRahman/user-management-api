@@ -1,11 +1,12 @@
 import express from 'express';
 import chalk from 'chalk';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import { dev } from './config/index.js';
 import authRoute from './routes/auth.js';
 import { connectDB } from './config/db.js';
-
+import userRoute from './routes/user.js';
 
 const app = express();
 
@@ -16,10 +17,16 @@ app.listen(port, async () => {
   await connectDB();
 });
 
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use('/api', authRoute);
+app.use('/api', userRoute);
 
 // database connection
 // schmea
