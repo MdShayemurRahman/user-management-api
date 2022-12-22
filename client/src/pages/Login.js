@@ -19,6 +19,7 @@ const Login = () => {
         password,
       };
       const response = await loginUser(user);
+      console.log(response);
       localStorage.setItem('jwt', response.data.token);
       // toast.success(response.data.message);
       navigate('/profile');

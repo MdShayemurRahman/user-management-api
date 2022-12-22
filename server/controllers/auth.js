@@ -2,6 +2,7 @@ import { comparePassword, hashPassword } from '../helper/index.js';
 import { User } from '../model/user.js';
 import jwt from 'jsonwebtoken';
 import { dev } from '../config/index.js';
+import { sendEmailWithNodeMailer } from '../helper/email.js';
 
 export const handleRegister = async (req, res) => {
   try {
@@ -24,18 +25,37 @@ export const handleRegister = async (req, res) => {
       password: hashPass,
       about,
     };
-    const newUser = new User(userData);
-    const savedData = await newUser.save();
-    if (!savedData) {
-      return res.status(400).json({
-        success: false,
-        message: 'user was not created',
-      });
-    }
+
+    // create a jwt token
+
+    const token = jwt.sign(userData, dev.app.jwtSecretKey, {
+      expiresIn: '5m',
+    });
+
+    const emailData = {
+      email,
+      subject: 'Account Activation Email',
+      html: `
+      <h2> Hello ${name} . </h2>
+      <p> Please click here to  <a href="http://127.0.0.1:3000/auth/activte/${token}"> activate your account </a>  </p>     
+      `, // html body
+    };
+
+    sendEmailWithNodeMailer(emailData);
+
+    // const newUser = new User(userData);
+    // const savedData = await newUser.save();
+    // if (!savedData) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: 'user was not created',
+    //   });
+    // }
 
     return res.status(201).json({
       success: true,
-      message: 'user was created',
+      message:
+        'An email has been sent to your email address. Please verify and then login',
     });
   } catch (error) {
     console.log(error);

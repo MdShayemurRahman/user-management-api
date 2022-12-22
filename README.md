@@ -66,8 +66,12 @@
 
 ## Day-7
 
+- sending email with nodemailer
 
-- protected route- activate user
+## Day-8
+
+- activate user
+
 - protected route
 - activate user
 - logout user
