@@ -70,10 +70,19 @@
 
 ## Day-8
 
-- activate user
+- create verify-user route
+- front end activation
 
-- protected route
-- activate user
-- logout user
+## Day-9
+
 - forget password
 - reset password
+
+## Day-10
+
+- protected route
+- logout user
+
+## Day-11
+
+- admin management

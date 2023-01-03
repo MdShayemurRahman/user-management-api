@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import axios from 'axios';
 import { loginUser } from '../service/userService';
 
 const Login = () => {
@@ -12,14 +11,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
+    
     try {
       event.preventDefault();
       const user = {
         email,
         password,
       };
+ 
       const response = await loginUser(user);
-      console.log(response);
+
       localStorage.setItem('jwt', response.data.token);
       // toast.success(response.data.message);
       navigate('/profile');
@@ -56,6 +57,13 @@ const Login = () => {
           />
 
           <button type='submit'>Login</button>
+          <button
+            onClick={() => {
+              navigate('/forget-password');
+            }}
+          >
+            Forgot password ?
+          </button>
         </form>
       </div>
     </div>
